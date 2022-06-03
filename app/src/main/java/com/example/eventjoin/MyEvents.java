@@ -102,6 +102,9 @@ public class MyEvents extends AppCompatActivity {
                             listView.setAdapter(ca);
                             counter = false;
                         }
+                        if (attending == "null"){
+                            counter = false;
+                        }
                     }
                 }
             }

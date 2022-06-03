@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
@@ -81,7 +82,7 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
         textView.setText("Create a New Event");
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         addre = findViewById(R.id.address);
-        Places.initialize(getApplicationContext(), "Key");
+        Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
 
 
         addre.setFocusable(false);
@@ -89,6 +90,7 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
             @Override
             public void onClick(View view) {
                 List<Place.Field> fieldList = Arrays.asList(Place.Field.ADDRESS, Place.Field.NAME);
+
 
                 Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fieldList).build(CreateEvent.this);
 

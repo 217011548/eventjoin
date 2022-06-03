@@ -7,6 +7,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,6 +16,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.navigation.NavigationView;
+
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -58,6 +61,7 @@ public class UpdatePage extends AppCompatActivity implements DatePickerDialog.On
     private Spinner spinner;
     private String[] going;
     DatabaseReference user;
+    String newarraycopy;
     private String[] months={"January","February","March","April","May","June","July","August","September","October","November","December"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,7 +193,7 @@ public class UpdatePage extends AppCompatActivity implements DatePickerDialog.On
                         event.child("address").setValue(e.getAddress());
                         event.child("latitude").setValue(e.getLatitude());
                         event.child("longitude").setValue(e.getLongitude());
-                        //event.child("going").setValue(going);
+                        event.child("going").setValue(e.getGoing());
                         event.child("date").setValue(e.getDate());
                         event.child("time").setValue(e.getTime());
                         event.child("type").setValue(e.getType());
@@ -211,22 +215,55 @@ public class UpdatePage extends AppCompatActivity implements DatePickerDialog.On
             @Override
             public void onClick(View v) {
                 DatabaseReference event=FirebaseDatabase.getInstance().getReference("Events").child(e.getId());
-                event.removeValue();
+
+
                 going=e.getGoing().split(";");
+                Log.d("EventID", e.getId());
+
+
+
                 counter1=true;
                 for(int i=1;i<going.length;i++){
                     counter1=true;
                     Log.d("User: ",going[i]);
                     user=FirebaseDatabase.getInstance().getReference("User").child(going[i]);
                     user.addValueEventListener(new ValueEventListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.O)
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if(counter1) {
                                 String attending = dataSnapshot.child("attending").getValue().toString();
+                                String[] temp = attending.split(";");
+
+                                    for(int i =1; i<temp.length; i++ ){
+                                        if(temp[i].equals(e.getId())){
+
+                                            String [] copyArray = new String[temp.length-1];
+
+                                            System.arraycopy(temp,0,copyArray,0, i);
+                                            System.arraycopy(temp, i+1, copyArray, i, temp.length - i - 1);
+                                            newarraycopy = String.join(";", copyArray);
+
+//
+//                                            Log.d("newarraycopy", newarraycopy);
+//                                            Log.d("temp ", String.valueOf(temp.length));
+//                                            Log.d("temp ", temp[0]);
+//                                            Log.d("temp ", temp[1]);
+//                                            Log.d("temp ", temp[2]);
+//
+//                                            Log.d("temp", copyArray[0]);
+//                                            Log.d("temp", copyArray[1]);
+
+
+                                        }
+
+                                    }
                                 Log.d("attending before ",attending);
                                 attending.replace(";"+id , "");
-                                Log.d("attending after ",attending);
+                                Log.d("attending after ",newarraycopy);
                                 user.child("attending").setValue(attending);
+                                user.child("attending").setValue(newarraycopy);
+
                                 counter1=false;
                             }
                         }
@@ -238,6 +275,7 @@ public class UpdatePage extends AppCompatActivity implements DatePickerDialog.On
                     });
 
                 }
+                event.removeValue();
                 Intent intent=new Intent(getApplicationContext(),UpdateEvent.class);
                 startActivity(intent);
             }
