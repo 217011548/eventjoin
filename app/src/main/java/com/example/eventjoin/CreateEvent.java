@@ -26,12 +26,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 
-import com.google.android.gms.common.api.Status;
 import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.widget.Autocomplete;
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,11 +44,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-
-import com.example.eventjoin.adapter.PlaceAutoSuggestAdapter;
-import com.google.android.gms.maps.model.LatLng;
-
-import static android.content.ContentValues.TAG;
 
 
 public class CreateEvent extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
