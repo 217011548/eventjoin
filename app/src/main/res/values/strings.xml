@@ -85,4 +85,8 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="google_maps_key">AIzaSyBN3XEBxSIqTuYffPZUCb8M58S1-OJX9TI</string>
+
+
+    <string name="biometric_failed">Fingerprint not recognized, try again.</string>
+
 </resources>
