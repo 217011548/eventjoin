@@ -10,13 +10,17 @@ import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+import com.example.eventjoin.security.KeystoreUtils;
+import com.example.eventjoin.biometric.BiometricManager;
+import com.example.eventjoin.biometric.BiometricCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -31,6 +35,8 @@ public class Login extends AppCompatActivity {
     private final static int REQUEST_LOCATION = 100;
     private final static int REQUEST_CAMERA = 101;
     private final static int CHOOSE_REQUEST = 188;
+
+    String[] values;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +61,30 @@ public class Login extends AppCompatActivity {
 
 
         });
+
+
+        ImageView fingerprintLogin = (ImageView) findViewById(R.id.button5);
+
+        fingerprintLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BiometricManager mBiometricManager = new BiometricManager.BiometricBuilder(getApplicationContext())
+                        .setTitle("Title")
+                        .setSubtitle("Subtitle")
+                        .setDescription("description")
+                        .setNegativeButtonText("Cancel")
+                        .build();
+
+                //start authentication
+                mBiometricManager.authenticate(getBiometricCallback());
+
+
+            }
+        });
+
+
+
+
 
         Toolbar toolbar=(Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
@@ -159,5 +189,99 @@ public class Login extends AppCompatActivity {
                     .show();
         }
     }
+
+    private BiometricCallback getBiometricCallback() {
+        return new BiometricCallback() {
+            private static final String TAG = "";
+
+            @Override
+            public void onSdkVersionNotSupported() {
+                Log.d(TAG, "onSdkVersionNotSupported");
+            }
+
+            @Override
+            public void onBiometricAuthenticationNotSupported() {
+                Log.d(TAG, "onBiometricAuthenticationNotSupported");
+            }
+
+            @Override
+            public void onBiometricAuthenticationNotAvailable() {
+                Log.d(TAG, "onBiometricAuthenticationNotAvailable");
+            }
+
+            @Override
+            public void onBiometricAuthenticationPermissionNotGranted() {
+                Log.d(TAG, "onBiometricAuthenticationPermissionNotGranted");
+            }
+
+            @Override
+            public void onBiometricAuthenticationInternalError(String error) {
+                Log.d(TAG, "onBiometricAuthenticationInternalError");
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                Log.d(TAG, "onAuthenticationFailed");
+            }
+
+            @Override
+            public void onAuthenticationCancelled() {
+                Log.d(TAG, "onAuthenticationCancelled");
+            }
+
+            @Override
+            public void onAuthenticationSuccessful() {
+                try {
+                    Log.d(TAG, "onAuthenticationSuccessful");
+                    values = KeystoreUtils.fetchCredentialForFingerprint(getApplicationContext());
+                    if (values != null) {
+                        String text = "";
+                        for (int i = 0; i < values.length; i++) {
+                            //text = text + values[i] + "\n";
+                            Log.d("fingerprinttext", values[i]);
+                        }
+                        //Log.d("fingerprinttext", text);
+
+
+                        String email = values[0];
+                        String password = values[1];
+                        FirebaseAuth auth = FirebaseAuth.getInstance();
+                        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if(task.isSuccessful()){
+                                    Intent i=new Intent(getApplicationContext(),MainActivity.class);
+                                    startActivity(i);
+                                }
+                                else{
+                                    Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+
+
+
+
+                    } else {
+                        Log.d("fingerprinttext", "null");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
+                Log.d(TAG, "onAuthenticationHelp, helpCode : " + helpCode + ", helpString : " + helpString);
+            }
+
+            @Override
+            public void onAuthenticationError(int errorCode, CharSequence errString) {
+                Log.d(TAG, "onAuthenticationError, errorCode : " + errorCode + ", errString : " + errString);
+            }
+        };
+    }
+
+
 
 }
