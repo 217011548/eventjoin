@@ -1,7 +1,6 @@
 package com.example.eventjoin;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,8 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.eventjoin.security.KeystoreUtils;
-import com.example.eventjoin.biometric.BiometricManager;
-import com.example.eventjoin.biometric.BiometricCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -38,8 +35,8 @@ public class Register extends AppCompatActivity {
         Toolbar toolbar=(Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        TextView textView = toolbar.findViewById(R.id.toolbarText);
-        textView.setText("Register");
+//        TextView textView = toolbar.findViewById(R.id.toolbarText);
+//        textView.setText("Register");
         Button register=(Button)findViewById(R.id.register);
 
         register.setOnClickListener(new View.OnClickListener() {
@@ -47,39 +44,36 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                EditText editText2=(EditText)findViewById(R.id.editText2);
-                final String email=editText2.getText().toString().trim();
-                final EditText pwd=(EditText)findViewById(R.id.editText4);
-                final String password=pwd.getText().toString();
-                EditText cpwd=(EditText)findViewById(R.id.editText5);
-                final TextView textView7=(TextView)findViewById(R.id.textView7);
-                String cpassword=cpwd.getText().toString();
-                final EditText n=(EditText)findViewById(R.id.editText);
-                final String name=n.getText().toString();
+                EditText et_email=(EditText)findViewById(R.id.et_email);
+                final String email=et_email.getText().toString().trim();
+                final EditText et_pwd=(EditText)findViewById(R.id.et_pwd);
+                final String password=et_pwd.getText().toString();
+                EditText et_cppwd=(EditText)findViewById(R.id.et_confirmpwd);
+                String cpassword=et_cppwd.getText().toString();
+                final EditText et_name=(EditText)findViewById(R.id.et_name);
+                final String name=et_name.getText().toString();
                 final FirebaseAuth auth= FirebaseAuth.getInstance();
+
+
+
+                //checking for user insert enough data and password achieved requirement
                 if(password.equals(cpassword) && password.length()>=6 && !name.equals("") && !email.equals("")){
-
-
-
-
+                    //pass the info to firebase for auth
                     auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 final FirebaseUser user=auth.getCurrentUser();
                                 DatabaseReference newUser= FirebaseDatabase.getInstance().getReference("User");
-                                //String id=newUser.push().getKey();
+
                                 FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
                                 String id=currentFirebaseUser.getUid();
-                                User u=new User(id,name,email);
-                                newUser.child(id).setValue(u);
+                                User userinfo=new User(id,name,email);
+                                newUser.child(id).setValue(userinfo);
 
+                                // save the login info for fingerprint
                                 String dataToSave = email + "," + password;
                                 KeystoreUtils.saveCredentialForFingerprint(getApplicationContext(), dataToSave);
-
-                                Log.d("dataToSave", dataToSave);
-
-
 
                                 Intent i= new Intent(getApplicationContext(),Login.class);
                                 startActivity(i);
@@ -87,7 +81,6 @@ public class Register extends AppCompatActivity {
                             else{
                                 Log.w("error:",task.getException());
                                 Toast.makeText(getApplicationContext(),task.getException().toString(),Toast.LENGTH_SHORT).show();
-                                //textView7.setText("error "+task.getException());
                             }
                         }
 
@@ -95,23 +88,9 @@ public class Register extends AppCompatActivity {
 
                     });
 
-
-
-
-//                    BiometricManager mBiometricManager = new BiometricManager.BiometricBuilder(getApplicationContext())
-//                            .setTitle("Title")
-//                            .setSubtitle("Subtitle")
-//                            .setDescription("description")
-//                            .setNegativeButtonText("Cancel")
-//                            .build();
-//
-//                    //start authentication
-//                    //mBiometricManager.authenticate(getBiometricCallback());
-
-
-
                 }
                 else
+                // alert user if not achieved the requirement
                 {
                     if(!password.equals(cpassword)){
                         Toast.makeText(getApplicationContext(),"Passwords dont match",Toast.LENGTH_SHORT).show();
@@ -130,76 +109,6 @@ public class Register extends AppCompatActivity {
         });
     }
 
-//    private BiometricCallback getBiometricCallback() {
-//        return new BiometricCallback() {
-//            private static final String TAG = "";
-//
-//            @Override
-//            public void onSdkVersionNotSupported() {
-//                Log.d(TAG, "onSdkVersionNotSupported");
-//            }
-//
-//            @Override
-//            public void onBiometricAuthenticationNotSupported() {
-//                Log.d(TAG, "onBiometricAuthenticationNotSupported");
-//            }
-//
-//            @Override
-//            public void onBiometricAuthenticationNotAvailable() {
-//                Log.d(TAG, "onBiometricAuthenticationNotAvailable");
-//            }
-//
-//            @Override
-//            public void onBiometricAuthenticationPermissionNotGranted() {
-//                Log.d(TAG, "onBiometricAuthenticationPermissionNotGranted");
-//            }
-//
-//            @Override
-//            public void onBiometricAuthenticationInternalError(String error) {
-//                Log.d(TAG, "onBiometricAuthenticationInternalError");
-//            }
-//
-//            @Override
-//            public void onAuthenticationFailed() {
-//                Log.d(TAG, "onAuthenticationFailed");
-//            }
-//
-//            @Override
-//            public void onAuthenticationCancelled() {
-//                Log.d(TAG, "onAuthenticationCancelled");
-//            }
-//
-//            @Override
-//            public void onAuthenticationSuccessful() {
-//                try {
-//                    Log.d(TAG, "onAuthenticationSuccessful");
-//                    String[] values = KeystoreUtils.fetchCredentialForFingerprint(getApplicationContext());
-//                    if (values != null) {
-//                        String text = "";
-//                        for (int i = 0; i < values.length; i++) {
-//                            //text = text + values[i] + "\n";
-//                            Log.d("fingerprinttext", values[i]);
-//                        }
-//                        //Log.d("fingerprinttext", text);
-//                    } else {
-//                        Log.d("fingerprinttext", "null");
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
-//                Log.d(TAG, "onAuthenticationHelp, helpCode : " + helpCode + ", helpString : " + helpString);
-//            }
-//
-//            @Override
-//            public void onAuthenticationError(int errorCode, CharSequence errString) {
-//                Log.d(TAG, "onAuthenticationError, errorCode : " + errorCode + ", errString : " + errString);
-//            }
-//        };
-//    }
 
 
 

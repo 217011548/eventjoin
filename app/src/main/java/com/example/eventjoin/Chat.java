@@ -63,7 +63,7 @@ public class Chat extends AppCompatActivity {
     private DrawerLayout dl;
     private ActionBarDrawerToggle abdt;
     private LinearLayout addImageAndMap;
-    private ImageButton imageButton2;
+    private ImageButton addfile_btn;
     private MessageAdapter ma;
     private ImageButton imageCamera;
     private ImageButton imageSelect;
@@ -97,14 +97,14 @@ public class Chat extends AppCompatActivity {
         textView.setText(eventName);
         dl = (DrawerLayout) findViewById(R.id.drawer_layout);
         addImageAndMap = findViewById(R.id.addImageAndMap);
-        imageButton2 = findViewById(R.id.imageButton2);
+        addfile_btn = findViewById(R.id.addfile);
         imageCamera = findViewById(R.id.imageCamera);
         imageSelect = findViewById(R.id.imageSelect);
         imageMap = findViewById(R.id.imageMap);
         messageBox = findViewById(R.id.messageBox);
         ma = new MessageAdapter(Chat.this, new ArrayList<>());
         messageBox.setAdapter(ma);
-        imageButton2.setOnClickListener(new View.OnClickListener() {
+        addfile_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addImageAndMap.setVisibility(addImageAndMap.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
@@ -123,6 +123,8 @@ public class Chat extends AppCompatActivity {
                 addImg();
             }
         });
+
+        // sent the location to chat room using by MapSelect.class
         imageMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -240,7 +242,7 @@ public class Chat extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    //take the photo to send to chat room
     private static final String FILE_PROVIDER_AUTHORITY = "com.example.eventjoin.fileprovider";
     private Uri imageUri;
 
@@ -309,6 +311,7 @@ public class Chat extends AppCompatActivity {
     }
 
 
+    //upload the photo to chat room
     private void doUpload() {
         Uri file = uriList.get(0);
         storageReference = storageRef.child("images/" + file.getLastPathSegment());

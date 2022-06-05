@@ -48,7 +48,7 @@ import java.util.Locale;
 
 public class CreateEvent extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     private int iday,iyear,imonth,fday,fmonth,fyear;
-    private int imin,ihour,fmin,fhour,iampm,fampm;
+    private int imin,ihour,fmin,fhour;
     private TextView dateDialog;
     private TextView timeDialog;
     private DrawerLayout dl;
@@ -56,14 +56,13 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
     private ActionBarDrawerToggle abdt;
     private String hosted;
     private boolean counter=true;
-
-    EditText addre;
+    private EditText addre;
     private String[] months={"January","February","March","April","May","June","July","August","September","October","November","December"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
-        final Spinner spinner=(Spinner)findViewById(R.id.spinner);
+        final Spinner spinner=(Spinner)findViewById(R.id.eventtypespinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.eventTypes, android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);
         Toolbar toolbar=(Toolbar) findViewById(R.id.app_bar);
@@ -72,10 +71,10 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
         TextView textView = (TextView)toolbar.findViewById(R.id.toolbarText);
         textView.setText("Create a New Event");
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        //make addre can auto complete
         addre = findViewById(R.id.address);
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
-
-
         addre.setFocusable(false);
         addre.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,10 +89,9 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
             }
         });
 
-
         Button create=(Button)findViewById(R.id.button);
-        dateDialog=(TextView)findViewById(R.id.textView18);
 
+        dateDialog=(TextView)findViewById(R.id.eventdate);
 
         dateDialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,14 +106,13 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
                 datePickerDialog.show();
             }
         });
-        timeDialog=(TextView)findViewById(R.id.textView19);
+        timeDialog=(TextView)findViewById(R.id.eventtime);
         timeDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar c=Calendar.getInstance();
                 ihour=c.get(Calendar.HOUR_OF_DAY);
                 imin=c.get(Calendar.MINUTE);
-                iampm=c.get(Calendar.AM_PM);
                 TimePickerDialog timePickerDialog=new TimePickerDialog(CreateEvent.this,CreateEvent.this,ihour,imin,true);
                 timePickerDialog.show();
             }
@@ -125,7 +122,7 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
             public void onClick(View v) {
                 FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
                 DatabaseReference event= FirebaseDatabase.getInstance().getReference("Events");
-                EditText name=(EditText)findViewById(R.id.editText7);
+                EditText name=(EditText)findViewById(R.id.ed_eventname);
 
                 EditText desc=(EditText)findViewById(R.id.description);
                 String type=spinner.getSelectedItem().toString();
@@ -145,6 +142,7 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
                     Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
                 }
                 try{
+                    //create the event and get the event location longitude and latitude.
                     if(!name.getText().toString().equals("")&&!addre.getText().toString().equals("")&&!dateDialog.getText().toString().equals("Click to select Date")&&!timeDialog.getText().toString().equals("Click to Select Time")&&!desc.getText().toString().equals("")){
                         Address loc = addresses.get(0);
                         double longitude = loc.getLongitude();
@@ -204,7 +202,7 @@ public class CreateEvent extends AppCompatActivity implements DatePickerDialog.O
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         fhour=hourOfDay;
         fmin=minute;
-        timeDialog.setText(fhour+":"+fmin+" hours");
+        timeDialog.setText(fhour+":"+fmin);
         Log.d("time ", fhour+":"+fmin);
     }
 

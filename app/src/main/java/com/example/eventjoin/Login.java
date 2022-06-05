@@ -37,12 +37,12 @@ public class Login extends AppCompatActivity {
     private final static int CHOOSE_REQUEST = 188;
 
     String[] values;
+    EditText email =(EditText)findViewById(R.id.et_login_email);
+    EditText pwd =(EditText)findViewById(R.id.et_login_pwd);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        /*Toolbar toolbar=(Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);*/
         PermissionUtils.onRequestMultiplePermissionsResult(this, PERMISSIONS_LOCATION, new PermissionUtils.OnPermissionListener() {
             @SuppressLint("MissingPermission")
             @Override
@@ -62,8 +62,8 @@ public class Login extends AppCompatActivity {
 
         });
 
-
-        ImageView fingerprintLogin = (ImageView) findViewById(R.id.button5);
+        //login by fingerprint
+        ImageView fingerprintLogin = (ImageView) findViewById(R.id.btn_fingerlogin);
 
         fingerprintLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,12 +78,8 @@ public class Login extends AppCompatActivity {
                 //start authentication
                 mBiometricManager.authenticate(getBiometricCallback());
 
-
             }
         });
-
-
-
 
 
         Toolbar toolbar=(Toolbar) findViewById(R.id.app_bar);
@@ -91,13 +87,13 @@ public class Login extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         TextView textView = toolbar.findViewById(R.id.toolbarText);
         textView.setText("Login");
-        final EditText editText3=(EditText)findViewById(R.id.editText3);
-        final String emailId=editText3.getText().toString();
+
+
         TextView forgot=(TextView)findViewById(R.id.forgot);
         forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailId=editText3.getText().toString();
+                String emailId= email.getText().toString();
                 if(emailId.equals("")){
                     Toast.makeText(getApplicationContext(),"Enter email to proceed "+emailId,Toast.LENGTH_SHORT).show();
                 }
@@ -122,28 +118,26 @@ public class Login extends AppCompatActivity {
         final FirebaseAuth auth=FirebaseAuth.getInstance();
         FirebaseUser user=auth.getCurrentUser();
         if(user!=null){
-            //EditText editText3=(EditText)findViewById(R.id.editText3);
-            EditText editText6=(EditText)findViewById(R.id.editText6);
-            editText3.setText(user.getEmail());
+            email.setText(user.getEmail());
         }
-        TextView textView15=(TextView)findViewById(R.id.textView15);
-        textView15.setOnClickListener(new View.OnClickListener() {
+        TextView tv_register=(TextView)findViewById(R.id.tv_register);
+        tv_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(),Register.class);
                 startActivity(i);
             }
         });
-        Button btn1=(Button)findViewById(R.id.button2);
+        Button btn1=(Button)findViewById(R.id.btn_Login);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String email,password;
-                EditText editText3=(EditText)findViewById(R.id.editText3);
-                EditText editText6=(EditText)findViewById(R.id.editText6);
-                email=editText3.getText().toString();
-                password=editText6.getText().toString();
+                //EditText editText3=(EditText)findViewById(R.id.et_login_email);
+                //EditText editText6=(EditText)findViewById(R.id.et_login_pwd);
+                email= Login.this.email.getText().toString();
+                password= pwd.getText().toString();
                 auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
