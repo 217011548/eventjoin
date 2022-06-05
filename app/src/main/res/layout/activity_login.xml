@@ -12,7 +12,7 @@
     </include>
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/et_login_email"
         android:layout_width="wrap_content"
         android:layout_height="41dp"
         android:layout_marginTop="92dp"
@@ -25,7 +25,7 @@
         app:layout_constraintTop_toBottomOf="@+id/app_bar" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/et_login_pwd"
         android:layout_width="wrap_content"
         android:layout_height="41dp"
         android:layout_marginStart="8dp"
@@ -39,10 +39,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/et_login_email" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/tv_login_email"
         android:layout_width="122dp"
         android:layout_height="43dp"
         android:layout_marginStart="8dp"
@@ -53,13 +53,13 @@
         android:text="E-mail:"
         android:textColor="#ffffff"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/editText3"
+        app:layout_constraintEnd_toStartOf="@+id/et_login_email"
         app:layout_constraintHorizontal_bias="0.153"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_bar" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/tv_login_pwd"
         android:layout_width="125dp"
         android:layout_height="47dp"
         android:layout_marginStart="8dp"
@@ -70,13 +70,13 @@
         android:text="Password:"
         android:textColor="#ffffff"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/editText6"
+        app:layout_constraintEnd_toStartOf="@+id/et_login_pwd"
         app:layout_constraintHorizontal_bias="0.163"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_login_email" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_Login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -87,11 +87,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.377"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+        app:layout_constraintTop_toBottomOf="@+id/et_login_pwd" />
 
 
     <ImageView
-        android:id="@+id/button5"
+        android:id="@+id/btn_fingerlogin"
         android:layout_width="54dp"
         android:layout_height="47dp"
         android:layout_marginStart="8dp"
@@ -102,10 +102,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.729"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+        app:layout_constraintTop_toBottomOf="@+id/et_login_pwd" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/tv_register"
         android:layout_width="296dp"
         android:layout_height="22dp"
         android:layout_marginStart="8dp"
@@ -118,7 +118,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_Login" />
 
     <TextView
         android:id="@+id/forgot"
@@ -133,6 +133,6 @@
         android:textColor="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_register" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

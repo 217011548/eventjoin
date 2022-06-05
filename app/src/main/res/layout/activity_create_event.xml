@@ -22,24 +22,24 @@
             </include>
 
             <EditText
-                android:id="@+id/editText7"
+                android:id="@+id/ed_eventname"
                 android:layout_width="201dp"
                 android:layout_height="46dp"
                 android:layout_below="@+id/app_bar"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="79dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginStart="79dp"
+                android:layout_marginLeft="79dp"
                 android:layout_marginTop="62dp"
-                android:layout_toEndOf="@+id/textView16"
-                android:layout_toRightOf="@+id/textView16"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_toEndOf="@+id/tv_eventname"
+                android:layout_toRightOf="@+id/tv_eventname"
                 android:contentDescription="Name of Event"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:textColor="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
 
-                app:layout_constraintStart_toEndOf="@+id/textView16"
+                app:layout_constraintStart_toEndOf="@+id/tv_eventname"
                 tools:text="Name of Event" />
 
 
@@ -47,16 +47,16 @@
                 android:id="@+id/description"
                 android:layout_width="212dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/ed_eventname"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/editText7"
-                android:layout_marginEnd="-1dp"
-                android:layout_marginLeft="69dp"
-                android:layout_marginRight="-1dp"
                 android:layout_marginStart="69dp"
+                android:layout_marginLeft="69dp"
                 android:layout_marginTop="369dp"
-                android:layout_toEndOf="@+id/textView20"
-                android:layout_toRightOf="@+id/textView20"
+                android:layout_marginEnd="-1dp"
+                android:layout_marginRight="-1dp"
+                android:layout_toEndOf="@+id/tv_eventdes"
+                android:layout_toRightOf="@+id/tv_eventdes"
                 android:contentDescription="Event Description"
                 android:ems="10"
                 android:inputType="textMultiLine"
@@ -64,14 +64,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.836"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView19"
+                app:layout_constraintTop_toBottomOf="@+id/eventtime"
                 tools:text="Event Description" />
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/spinner"
+                android:layout_below="@+id/eventtypespinner"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentEnd="true"
@@ -89,7 +89,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/description" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/tv_eventname"
                 android:layout_width="108dp"
                 android:layout_height="52dp"
                 android:layout_below="@+id/app_bar"
@@ -104,26 +104,26 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/tv_eventaddress"
                 android:layout_width="108dp"
                 android:layout_height="44dp"
-                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/eventtime"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView19"
-                android:layout_marginLeft="12dp"
+                android:layout_alignParentLeft="true"
                 android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
                 android:layout_marginTop="62dp"
                 android:text="Address"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_eventname" />
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/eventdate"
                 android:layout_width="wrap_content"
                 android:layout_height="47dp"
-                android:layout_below="@+id/editText7"
+                android:layout_below="@+id/ed_eventname"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentEnd="true"
@@ -138,17 +138,17 @@
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView17" />
+                app:layout_constraintTop_toTopOf="@+id/tv_eventaddress" />
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/eventtime"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView18"
+                android:layout_below="@+id/eventdate"
                 android:layout_marginEnd="146dp"
                 android:layout_marginLeft="107dp"
                 android:layout_marginRight="146dp"
@@ -159,13 +159,13 @@
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                app:layout_constraintTop_toBottomOf="@+id/eventdate" />
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/tv_eventdes"
                 android:layout_width="114dp"
                 android:layout_height="42dp"
-                android:layout_below="@+id/textView17"
+                android:layout_below="@+id/tv_eventaddress"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_marginStart="16dp"
@@ -178,13 +178,13 @@
                 app:layout_constraintEnd_toStartOf="@+id/description"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                app:layout_constraintTop_toBottomOf="@+id/eventtime" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/tv_eventtype"
                 android:layout_width="108dp"
                 android:layout_height="45dp"
-                android:layout_below="@+id/textView20"
+                android:layout_below="@+id/tv_eventdes"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_marginStart="16dp"
@@ -195,38 +195,38 @@
                 android:textSize="18sp" />
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/eventtypespinner"
                 android:layout_width="209dp"
                 android:layout_height="42dp"
                 android:layout_below="@+id/description"
-                android:layout_marginLeft="78dp"
                 android:layout_marginStart="78dp"
+                android:layout_marginLeft="78dp"
                 android:layout_marginTop="65dp"
-                android:layout_toEndOf="@+id/textView11"
-                android:layout_toRightOf="@+id/textView11" />
+                android:layout_toEndOf="@+id/tv_eventtype"
+                android:layout_toRightOf="@+id/tv_eventtype" />
 
             <EditText
                 android:id="@+id/address"
                 android:layout_width="222dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/eventtime"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/textView19"
-                android:layout_marginEnd="0dp"
-                android:layout_marginLeft="69dp"
-                android:layout_marginRight="0dp"
                 android:layout_marginStart="69dp"
+                android:layout_marginLeft="69dp"
                 android:layout_marginTop="62dp"
-                android:layout_toEndOf="@+id/textView17"
-                android:layout_toRightOf="@+id/textView17"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_toEndOf="@+id/tv_eventaddress"
+                android:layout_toRightOf="@+id/tv_eventaddress"
                 android:contentDescription="Address"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:textColor="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.493"
-                app:layout_constraintStart_toEndOf="@+id/textView17"
-                app:layout_constraintTop_toBottomOf="@+id/editText7"
+                app:layout_constraintStart_toEndOf="@+id/tv_eventaddress"
+                app:layout_constraintTop_toBottomOf="@+id/ed_eventname"
                 tools:text="Address" />
 
         </RelativeLayout>
