@@ -65,10 +65,10 @@ public class CustomAdapter extends BaseAdapter {
                 Log.d("length:",""+eventids.length);
                 Log.d("Type", name);
                 if(type.equals("CQB")) {
-                    v.setBackgroundResource(R.drawable.sports);
+                    v.setBackgroundResource(R.drawable.cqb);
                 }
                 else if(type.equals("Outdoor")){
-                    v.setBackgroundResource(R.drawable.professional);
+                    v.setBackgroundResource(R.drawable.outdoor);
                 }
 
                 EventName.setText(name);
