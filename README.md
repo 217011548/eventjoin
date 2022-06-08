@@ -1,4 +1,4 @@
-# Wargamebooking
+# eventjoin
 
 User can register login the system by password or fingerprint  
 User can create, edit or join event for public  
