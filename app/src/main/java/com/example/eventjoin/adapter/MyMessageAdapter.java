@@ -17,7 +17,6 @@ public class MyMessageAdapter extends BaseAdapter {
 
     private List<Messages> messages=new ArrayList<>();
     private LayoutInflater linf;
-    private String email;
 
     public MyMessageAdapter(Context c, List<Messages> messages) {
         this.messages = messages;

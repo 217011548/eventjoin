@@ -64,16 +64,6 @@ public class CustomAdapter extends BaseAdapter {
                 Log.d("DATA::",eventids[position]+" "+position+" "+name+" "+time+" "+date);
                 Log.d("length:",""+eventids.length);
                 Log.d("Type", name);
-                /*if(type=="Sports")
-                    v.setBackground(Drawable.createFromPath(""));
-                else if(type=="Music")
-                    v.setBackgroundColor(Color.WHITE);
-                else if(type=="Professional")
-                    v.setBackgroundColor(Color.BLUE);
-                else if(type=="Party")
-                    v.setBackgroundColor(Color.YELLOW);
-                else
-                    v.setBackgroundColor(Color.GRAY);*/
                 if(type.equals("CQB")) {
                     v.setBackgroundResource(R.drawable.sports);
                 }
@@ -91,10 +81,6 @@ public class CustomAdapter extends BaseAdapter {
 
             }
         });
-        /*Log.d("Event id", events.get(1).getId());
-        EventName.setText(events.get(position).getEvent_name());
-        Date.setText(events.get(position).getDate());
-        Time.setText(events.get(position).getTime());*/
         return v;
     }
 }

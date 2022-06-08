@@ -18,7 +18,6 @@ public class PublicCustomAdapter extends BaseAdapter {
     LayoutInflater linf;
     public PublicCustomAdapter(Context c, List<Event> events){
         this.events = events;
-        //Log.d("Event id", events.get(0).getId());
         linf=(LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -46,27 +45,16 @@ public class PublicCustomAdapter extends BaseAdapter {
         TextView Time=(TextView) v.findViewById(R.id.Time);
         TextView Date=(TextView) v.findViewById(R.id.Time);
         String type=events.get(position).getType();
-        if(type.equals("Sports")) {
-            v.setBackgroundResource(R.drawable.sports);
-        }
-        else if(type.equals("Professional")){
-            v.setBackgroundResource(R.drawable.professional);
-        }
-        else if(type.equals("Music")){
-            v.setBackgroundResource(R.drawable.music3);
-        }
-        else if(type.equals("Party")){
-            v.setBackgroundResource(R.drawable.party);
+        if(type.equals("CQB")) {
+            v.setBackgroundResource(R.drawable.cqb);
         }
         else{
-            v.setBackgroundResource(R.drawable.other);
+            v.setBackgroundResource(R.drawable.outdoor);
         }
         v.getBackground().setAlpha(150);
-        //Time.setVisibility(View.INVISIBLE);
         EventName.setText(events.get(position).getEvent_name());
         String[] t=events.get(position).getDate().split(",");
         Date.setText(t[0]);
-        //Time.setText(events.get(position).getTime());
         return v;
     }
 }
