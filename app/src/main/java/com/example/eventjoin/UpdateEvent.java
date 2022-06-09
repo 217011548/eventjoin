@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.eventjoin.adapter.PublicCustomAdapter;
+import com.example.eventjoin.adapter.PublicEventAdapter;
 import com.google.android.material.navigation.NavigationView;
 import android.os.Bundle;
 import android.util.Log;
@@ -99,7 +99,7 @@ public class UpdateEvent extends AppCompatActivity {
                             }
                         }
 
-                        PublicCustomAdapter ca=new PublicCustomAdapter(getApplication(),eventsList);
+                        PublicEventAdapter ca=new PublicEventAdapter(getApplication(),eventsList);
                         listView.setAdapter(ca);
                     }
 

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.eventjoin.adapter.CustomAdapter;
+import com.example.eventjoin.adapter.EventAdapter;
 import com.google.android.material.navigation.NavigationView;
 import android.os.Bundle;
 import android.util.Log;
@@ -97,7 +97,7 @@ public class MyEvents extends AppCompatActivity {
                                 te = te + t.charAt(i);
                         }
                         if (eventIds.length >= 1) {
-                            CustomAdapter ca = new CustomAdapter(getApplicationContext(), eventIds);
+                            EventAdapter ca = new EventAdapter(getApplicationContext(), eventIds);
                             ListView listView = (ListView) findViewById(R.id.listview);
                             listView.setAdapter(ca);
                             counter = false;

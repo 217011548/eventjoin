@@ -37,8 +37,8 @@ public class Login extends AppCompatActivity {
     private final static int CHOOSE_REQUEST = 188;
 
     String[] values;
-    EditText email =(EditText)findViewById(R.id.et_login_email);
-    EditText pwd =(EditText)findViewById(R.id.et_login_pwd);
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +61,9 @@ public class Login extends AppCompatActivity {
 
 
         });
+
+        EditText email=(EditText)findViewById(R.id.et_login_email);
+        EditText pwd=(EditText)findViewById(R.id.et_login_pwd);
 
         //login by fingerprint
         ImageView fingerprintLogin = (ImageView) findViewById(R.id.btn_fingerlogin);
@@ -133,11 +136,12 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
+                EditText editText3=(EditText)findViewById(R.id.et_login_email);
+                EditText editText6=(EditText)findViewById(R.id.et_login_pwd);
                 String email,password;
-                //EditText editText3=(EditText)findViewById(R.id.et_login_email);
-                //EditText editText6=(EditText)findViewById(R.id.et_login_pwd);
-                email= Login.this.email.getText().toString();
-                password= pwd.getText().toString();
+                email= editText3.getText().toString();
+                password= editText6.getText().toString();
                 auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -183,6 +187,8 @@ public class Login extends AppCompatActivity {
                     .show();
         }
     }
+
+
 
     private BiometricCallback getBiometricCallback() {
         return new BiometricCallback() {
@@ -275,6 +281,7 @@ public class Login extends AppCompatActivity {
             }
         };
     }
+
 
 
 

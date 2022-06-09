@@ -244,16 +244,6 @@ public class UpdatePage extends AppCompatActivity implements DatePickerDialog.On
                                             System.arraycopy(temp, i+1, copyArray, i, temp.length - i - 1);
                                             newarraycopy = String.join(";", copyArray);
 
-//
-//                                            Log.d("newarraycopy", newarraycopy);
-//                                            Log.d("temp ", String.valueOf(temp.length));
-//                                            Log.d("temp ", temp[0]);
-//                                            Log.d("temp ", temp[1]);
-//                                            Log.d("temp ", temp[2]);
-//
-//                                            Log.d("temp", copyArray[0]);
-//                                            Log.d("temp", copyArray[1]);
-
 
                                         }
 
@@ -265,6 +255,9 @@ public class UpdatePage extends AppCompatActivity implements DatePickerDialog.On
                                 user.child("attending").setValue(newarraycopy);
 
                                 counter1=false;
+                                Intent i=new Intent(getApplicationContext(),MainActivity.class);
+                                startActivity(i);
+
                             }
                         }
 

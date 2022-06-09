@@ -120,6 +120,9 @@ public class PublicEventDescription extends AppCompatActivity {
                     members[members.length - 1].replace("}", " ");
                     MemberAdapter ma=new MemberAdapter(getApplicationContext(),members);
                     listview.setAdapter(ma);
+
+
+
                 }
             }
 
@@ -128,7 +131,11 @@ public class PublicEventDescription extends AppCompatActivity {
 
             }
         });
-        Button btn3=(Button)findViewById(R.id.button3);
+
+
+
+
+        Button btn3=(Button)findViewById(R.id.btn_location);
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,7 +145,7 @@ public class PublicEventDescription extends AppCompatActivity {
                 startActivity(openMap);
             }
         });
-        Button join=(Button) findViewById(R.id.button4);
+        Button join=(Button) findViewById(R.id.btn_jevent);
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

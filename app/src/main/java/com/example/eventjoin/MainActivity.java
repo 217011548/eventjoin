@@ -1,7 +1,7 @@
 package com.example.eventjoin;
 
 import android.content.Intent;
-import android.content.res.Resources;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.eventjoin.adapter.PublicCustomAdapter;
+import com.example.eventjoin.adapter.PublicEventAdapter;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         final ListView listview=(ListView)findViewById(R.id.listview);
-        Resources res=getResources();
+        //Resources res=getResources();
         final DatabaseReference event= FirebaseDatabase.getInstance().getReference("Events");
         final List<Event> events=new ArrayList<>();
         event.addValueEventListener(new ValueEventListener() {
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                     Event event=keynode.getValue(Event.class);
                     if(check(event,events)) {
                         events.add(event);
-                        PublicCustomAdapter pca = new PublicCustomAdapter(getApplicationContext(), events);
+                        PublicEventAdapter pca = new PublicEventAdapter(getApplicationContext(), events);
                         listview.setAdapter(pca);
                     }
                 }
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //listview.setAdapter(new ArrayAdapter<String>(this,R.layout.custom_list_public));
-        PublicCustomAdapter pca = new PublicCustomAdapter(this, events);
+        PublicEventAdapter pca = new PublicEventAdapter(this, events);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
