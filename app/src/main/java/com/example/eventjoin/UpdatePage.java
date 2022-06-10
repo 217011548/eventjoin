@@ -83,7 +83,7 @@ public class UpdatePage extends AppCompatActivity implements DatePickerDialog.On
         dl.addDrawerListener(abdt);
         abdt.syncState();
 
-        String apiKey = getString(R.string.googleMapkey);
+        String apiKey = getString(R.string.google_maps_key);
         Places.initialize(getApplicationContext(), apiKey);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
