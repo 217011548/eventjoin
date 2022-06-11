@@ -50,7 +50,6 @@
         <item>360</item>
         <item>-1</item>
     </string-array>
-    <string name="mapbox_access_token">pk.eyJ1IjoiaHY1OSIsImEiOiJjandkNTRiNTcwZ3NyNGJwbGRseDhlbThwIn0.bilTRB3l5Z2Lj1y02susbg</string>
 
     <string-array name="list_preference_entries">
         <item>Entry 1</item>
